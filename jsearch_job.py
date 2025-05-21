@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import time
 
 # --- CONFIG ---
-API_KEY = "995d00fd61mshf6cd03810f6847bp16d7c1jsn3e70d04998f1"  # <<<<<<<<<<< paste your key here
+API_KEY = "rapid_api_key"  # <<<<<<<<<<< paste your key here
 TOTAL_PAGES_PER_CATEGORY = 4  # <-- how many pages PER category to scrape
 CATEGORIES = CATEGORIES = CATEGORIES = [
     "accountant", "advocate", "agriculture", "apparel", "arts",
