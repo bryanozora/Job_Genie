@@ -76,5 +76,8 @@ This project was created as a college assignment for the **Natural Language Proc
 
 Install required packages via pip:
 
-pip install streamlit pandas torch transformers sentence-transformers spacy joblib pymupdf
-python -m spacy download en_core_web_sm
+`pip install streamlit pandas torch transformers sentence-transformers spacy joblib pymupdf python -m spacy download en_core_web_sm`
+
+run resume_classifier.py to train the bert model
+
+run the jobgenie.py by using streamlit (streamlit run jobgenie.py)
