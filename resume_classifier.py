@@ -62,7 +62,7 @@ test_loader = DataLoader(test_dataset, batch_size=8)
 
 # ---------- MODEL SETUP ----------
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model = BertForSequenceClassification.from_pretrained("bert-base-uncased", num_labels=len(categories))
+model = BertForSequenceClassification.from_pretrained("bert-base-multilingual-cased", num_labels=len(categories))
 model.to(device)
 
 optimizer = AdamW(model.parameters(), lr=5e-5)
