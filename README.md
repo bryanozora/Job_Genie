@@ -50,10 +50,16 @@ This project was created as a college assignment for the **Natural Language Proc
 | `auth_utils.py` | Handles user/business authentication |
 | `jsearch_job.py` | Job scraper using jSearch (RapidAPI) |
 | `migrate_old_data.py` | Precomputes job embeddings & skills for matching |
-| `jobs.csv` | Job postings dataset |
-| `jz_skill_patterns.jsonl` | spaCy patterns for skill recognition |
+| `jobs.csv` | Scraped Job postings dataset |
+| `applications.csv | CSV database for job applications
+| `jz_skill_patterns.jsonl` | spaCy patterns for skill recognition taken from jobzilla at https://github.com/kingabzpro/jobzilla_ai/blob/main/jz_skill_patterns.jsonl |
 | `users.csv`, `business_users.csv` | CSV database for user credentials |
 | `label2id_eng.pkl`, `label2id_indobert.pkl` | Mapping dictionaries for category labels |
+| `Laporan JobGenie.docx` | Project Report of this project. It is in indonesian |
+| `designer.pdf`, `digital_media.pdf`, `information_technology.pdf`, `resume_information_technology.pdf` | some english sample resumes used to test, aside from `resume_information_technology.pdf` which is in indonesian |
+| `id2label_indobert.pkl`, `label2id_eng.pkl`, `label2id_indobert.pkl` | id to label and label to id mapping for both indobert and english (bert) model
+| `translate_resume_huggingface (1).ipynb` | translation from english dataset to indonesian dataset using MarianMT model from huggingface
+
 
 ---
 
