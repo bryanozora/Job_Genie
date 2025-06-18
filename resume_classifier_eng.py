@@ -36,7 +36,7 @@ id2label = {i: v for v, i in label2id.items()}
 df['label'] = df['Category'].map(label2id)
 
 # Save label2id map
-joblib.dump(label2id, "label2id.pkl")
+joblib.dump(label2id, "label2id_eng.pkl")
 
 # ---------- TOKENIZATION ----------
 tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
@@ -98,6 +98,5 @@ print(classification_report(all_labels, all_preds, target_names=categories))
 print("Accuracy:", accuracy_score(all_labels, all_preds))
 
 # ---------- SAVE ----------
-model.save_pretrained("bert_resume_model")
-tokenizer.save_pretrained("bert_resume_model")
-print("✅ Model saved to 'bert_resume_model'")
+model.save_pretrained("bert_resume_model_eng")
+tokenizer.save_pretrained("bert_resume_model_eng")

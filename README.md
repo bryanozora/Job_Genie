@@ -1,23 +1,27 @@
-# 📚 Academic Context  
-This project was created as a college assignment for the **Natural Language Processing** and **Applied AI** course at **Petra Christian University**. It applies various NLP and deep learning algorithms to intelligently match CVs/Resumes with relevant job descriptions.
+# 💬 JobGenie – Smart Resume & Job Matcher
+
+**JobGenie** is an AI-powered web application that helps job seekers find suitable job opportunities based on their resumes. This project was developed as a university assignment for the **Natural Language Processing** and **Applied AI** courses at **Petra Christian University**, applying modern NLP techniques and BERT-based deep learning models.
 
 ---
 
-# 💬 JobGenie – Smart Resume & Job Matcher  
+## 📚 Academic Context
 
-**JobGenie** is an AI-powered web application that helps job seekers find suitable job opportunities based on the content of their resumes. It performs **resume classification**, **skill extraction**, and **semantic similarity matching** to recommend the top 10 most relevant job postings. This project was developed as a college assignment for the **Natural Language Processing** and **Applied AI** course at **Petra Christian University**, showcasing practical applications of NLP and BERT-based deep learning models.
+This project was created as a college assignment for the **Natural Language Processing** and **Applied AI** courses at **Petra Christian University**. It showcases how NLP and transformer-based models can be used to solve real-world problems in job matching.
 
 ---
 
 ## 📌 Features
 
-- 🔐 **User Authentication**: Login and sign-up system with CSV-based storage.
-- 📄 **Resume Upload**: Accepts resumes in PDF format and extracts textual content.
-- 🧠 **Resume Classification**: Categorizes resumes using a fine-tuned BERT model (trained on 20+ resume categories).
-- 🛠️ **Skill Extraction**: Uses spaCy NER with custom patterns to extract domain-relevant skills.
-- 🤝 **Job Matching**: Compares resume content with job descriptions using Sentence Transformers for semantic similarity, skill overlap, and category match.
-- 📊 **Top 10 Job Recommendations**: Displays job cards with relevance score, skill match %, category match, and semantic similarity.
-- 🧾 **Detailed Analysis**: Shows resume summary, extracted skills, predicted category, and full extracted resume content.
+- 🔐 **User Authentication**: Login/signup system for job seekers & businesses using CSV-based storage.
+- 📄 **Resume Upload**: Accepts PDF files and extracts text using PyMuPDF.
+- 🧠 **Resume Classification**: Classifies resume into categories using BERT/IndoBERT models (English & Indonesian).
+- 🛠️ **Skill Extraction**: Extracts domain-specific skills using spaCy NER with custom pattern rules.
+- 🤝 **Job Matching**:
+  - Category match (50%)
+  - Skill overlap (30%)
+  - Semantic similarity using Sentence Transformers (20%)
+- 📊 **Top 10 Recommendations**: Displays best-matched job cards with compatibility score, skills, category alignment, and job links.
+- 📂 **Business Dashboard**: Businesses can view applications submitted to their job postings.
 
 ---
 
@@ -26,59 +30,128 @@ This project was created as a college assignment for the **Natural Language Proc
 - **Language**: Python  
 - **Framework**: Streamlit  
 - **Libraries**:
-  - `transformers` (BERT for classification)
-  - `sentence-transformers` (semantic similarity)
-  - `spaCy` (custom skill extraction using NER patterns)
-  - `pandas`, `scikit-learn`, `joblib`
-  - `PyMuPDF` (`fitz`) for PDF parsing
-  - `torch` for deep learning
+  - `transformers`, `torch` – BERT and IndoBERT resume classification
+  - `sentence-transformers` – Semantic similarity matching
+  - `spaCy` – Skill extraction using NER patterns
+  - `pandas`, `joblib`, `scikit-learn`
+  - `PyMuPDF (fitz)` – PDF parsing
+  - `langdetect` – Resume language detection
+  - `beautifulsoup4`, `requests`, `tqdm` – Job scraping from jSearch API
 
 ---
 
 ## 📁 Files Overview
 
-- `jobgenie.py` – Main Streamlit app with UI, resume analysis, matching logic, and user system.
-- `resume_classifier.py` – Script to train and evaluate a BERT model for resume category classification.
-- `bert_resume_model/` – Saved transformer model used in prediction (still need to run the resume_classifier.py since i cannot upload the model file because it is too large).
-- `data\` - collection of resumes taken from resume dataset on kaggle (https://www.kaggle.com/datasets/snehaanbhawal/resume-dataset)
-- `Resume\Resume.csv` - A csv file containing every resume content taken from resume dataset on kaggle (https://www.kaggle.com/datasets/snehaanbhawal/resume-dataset)
-- `label2id.pkl` – Mapping dictionary from category names to label IDs.
-- `auth_utils.py` – Authentication utility module for handling login/signup and credential management.
-- `designer.pdf`, `digital media.pdf`, `information tehcnology.pdf` - Resume used to test the application
-- `jobs.csv` – Job database with fields like title, company, description, category, salary, and link.
-- `jsearch_job.py` - a code used to retreive job list from jsearch using rapidAPI
-- `users.csv` - saved user accounts
-- `jz_skill_patterns.jsonl` – spaCy EntityRuler pattern file for skill recognition.
+| File | Description |
+|------|-------------|
+| `jobgenie.py` | Main Streamlit app: UI, resume processing, job matching |
+| `resume_classifier_eng.py` | Train and evaluate BERT model for English resume classification |
+| `resume_classifier_ind.py` | Train and evaluate IndoBERT for Indonesian resume classification |
+| `auth_utils.py` | Handles user/business authentication |
+| `jsearch_job.py` | Job scraper using jSearch (RapidAPI) |
+| `migrate_old_data.py` | Precomputes job embeddings & skills for matching |
+| `jobs.csv` | Job postings dataset |
+| `jz_skill_patterns.jsonl` | spaCy patterns for skill recognition |
+| `users.csv`, `business_users.csv` | CSV database for user credentials |
+| `label2id_eng.pkl`, `label2id_indobert.pkl` | Mapping dictionaries for category labels |
 
 ---
 
-## 🚀 How It Works
+## 🚀 How to Run
 
-1. **User Login**: Users log in or sign up through a basic credential system.
-2. **Resume Upload**: Users upload their resume in PDF format.
-3. **Resume Processing**:
-   - Extract text using PyMuPDF
-   - Clean and tokenize content
-   - Run BERT classifier to predict resume category
-   - Extract skills using spaCy NER with custom patterns
-4. **Job Matching**:
-   - Each job description is vectorized using `all-MiniLM-L6-v2`
-   - Match is based on:
-     - Category match (50% weight)
-     - Skill overlap (30% weight)
-     - Semantic similarity (20% weight)
-   - Top 10 jobs are sorted and displayed
-5. **Results Displayed**: Users see job titles, compatibility scores, skill overlap, category alignment, semantic similarity, and application links.
+### 1. Install Dependencies
+
+```bash
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+python -m spacy download en_core_web_sm
+```
+
+If you don't have a `requirements.txt`, use this:
+
+```txt
+streamlit
+pandas
+PyMuPDF==1.23.9
+joblib
+spacy
+sentence-transformers
+scikit-learn
+transformers
+torch
+langdetect
+beautifulsoup4
+requests
+tqdm
+```
 
 ---
 
-## ✅ Requirements
+### 2. Job Scraping (optional)
 
-Install required packages via pip:
+Edit `jsearch_job.py` and insert your API key:
 
-`pip install streamlit pandas torch transformers sentence-transformers spacy joblib pymupdf` 
-`python -m spacy download en_core_web_sm`
+```python
+API_KEY = "your_rapidapi_key_here"
+```
 
-run resume_classifier.py to train the bert model
+Run:
 
-run the jobgenie.py by using streamlit (streamlit run jobgenie.py)
+```bash
+python jsearch_job.py
+```
+
+
+---
+
+### 3. Train Resume Classifier (if not already trained)
+
+```bash
+python resume_classifier_eng.py      # For English BERT model
+python resume_classifier_ind.py      # For IndoBERT model
+```
+
+This will save:
+- `bert_resume_model_eng/`
+- `indobert_resume_model/`
+- `label2id_eng.pkl`, `label2id_indobert.pkl`
+
+---
+
+### 3. Precompute Job Embeddings (optional)
+
+If you are not using the jobs.csv i provided, but runs the jsearch_job.py, then, run:
+
+```bash
+python migrate_old_data.py
+```
+
+this will generate and save job description embeddings into jobs.csv
+
+---
+
+### 4. Launch the Web App
+
+```bash
+streamlit run jobgenie.py
+```
+
+Visit: `http://localhost:8501`
+
+---
+
+## 🧪 Testing & Demo
+
+Upload sample resumes like `designer.pdf`, `digital media.pdf`, etc.  
+The system will:
+- Detect language (English / Indonesian)
+- Predict resume category
+- Extract relevant skills
+- Display top 10 matched jobs
+
+---
+
+## 📄 Dataset Sources
+
+- Resume Dataset: https://www.kaggle.com/datasets/snehaanbhawal/resume-dataset  

@@ -67,7 +67,7 @@ def view_applications_dashboard():
         st.markdown(f"\U0001F539 Semantic Similarity: `{row['semantic_similarity']}%`")
         st.markdown(f"\U0001F9E0 Extracted Skills: `{row['skills']}`")
         with st.expander("\U0001F4C4 View Extracted Resume"):
-            st.text_area("Resume", row["resume_text"], height=300)
+            st.text_area("Resume", row["resume_text"], height=300, key=f"resume_{idx}")
         st.markdown("---")
 
 # ------------------ PRECOMPUTE JOB FEATURES ------------------

@@ -89,19 +89,19 @@ for name, param in model.named_parameters():
     if not any(layer in name for layer in ["classifier", "encoder.layer.11", "pooler"]):
         param.requires_grad = False
 
-optimizer = AdamW(filter(lambda p: p.requires_grad, model.parameters()), lr=3e-5)
+optimizer = AdamW(filter(lambda p: p.requires_grad, model.parameters()), lr=5e-5)
 lr_scheduler = get_scheduler("linear", optimizer=optimizer, num_warmup_steps=0,
                              num_training_steps=len(train_loader) * 10)
 
 # ---------- DEBUG INPUT ----------
 print("\n🔍 Sample tokenized input check:")
 sample_text = df["Cleaned_Resume"].iloc[0]
-tokens = tokenizer(sample_text, truncation=True, padding=True, max_length=256, return_tensors="pt")
+tokens = tokenizer(sample_text, truncation=True, padding=True, max_length=512, return_tensors="pt")
 print("Sample input length:", len(tokens['input_ids'][0]))
 print("Sample tokens:", tokenizer.convert_ids_to_tokens(tokens['input_ids'][0][:20]))
 
 # ---------- TRAIN WITH EARLY STOPPING ----------
-epochs = 10
+epochs = 20
 patience = 3
 best_accuracy = 0
 epochs_no_improve = 0
