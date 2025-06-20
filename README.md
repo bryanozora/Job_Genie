@@ -94,6 +94,8 @@ tqdm
 
 ### 2. Job Scraping (optional)
 
+if you want to get your own job listing, you can do this. otherwise skip
+
 Edit `jsearch_job.py` and insert your API key:
 
 ```python
@@ -105,6 +107,16 @@ Run:
 ```bash
 python jsearch_job.py
 ```
+
+If you are not using the jobs.csv i provided, but runs the jsearch_job.py, then, run:
+
+```bash
+python migrate_old_data.py
+```
+
+this will generate and save job description embeddings into jobs.csv
+
+---
 
 
 ---
@@ -120,18 +132,6 @@ This will save:
 - `bert_resume_model_eng/`
 - `indobert_resume_model/`
 - `label2id_eng.pkl`, `label2id_indobert.pkl`
-
----
-
-### 3. Precompute Job Embeddings (optional)
-
-If you are not using the jobs.csv i provided, but runs the jsearch_job.py, then, run:
-
-```bash
-python migrate_old_data.py
-```
-
-this will generate and save job description embeddings into jobs.csv
 
 ---
 
