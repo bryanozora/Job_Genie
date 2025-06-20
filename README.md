@@ -118,9 +118,6 @@ this will generate and save job description embeddings into jobs.csv
 
 ---
 
-
----
-
 ### 3. Train Resume Classifier (if not already trained)
 
 ```bash
